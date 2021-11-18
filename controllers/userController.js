@@ -42,7 +42,7 @@ exports.create = async (req, res, next) => {
   if (userExist && (await bcrypt.compare(password, userExist.password))) {
     /* const { _id, firstname, lastname, identification, photo, active } =
       userExist; */
-    const token = jwt.sign({ user_id: userExist._id, username }, "tokensecret"/* process.env.TOKENSECRET */, { expiresIn: "2h" } );
+    const token = jwt.sign({ user_id: userExist._id, username }, process.env.TOKENSECRET, { expiresIn: "2h" } );
     userExist.token = token;
     res.status(200).json(userExist/* {
       _id,

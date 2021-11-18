@@ -22,6 +22,7 @@ exports.create = (req, res, next) => {
 
 //Aqui trae la info pal GET
 exports.index = (req, res, next) => {
+    console.log(req.user)
     noteController.find({}, (err, notes) =>{
         if (err) {
             return next(err);

@@ -10,8 +10,8 @@ const verifyToken = (req, res, next) => {
 
     try {
         token = token.substring(7, token.length);
-        console.log(token);
-        const decoded = jwt.verify(token, "tokensecret");
+        //console.log(token);
+        const decoded = jwt.verify(token, process.env.TOKENSECRET);
         req.user = decoded;
     } catch (err) {
         return res.status(403).send("Invalid token");
