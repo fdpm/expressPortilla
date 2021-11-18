@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const note_contoller = require("../controllers/noteController");
+
 /* const auth = require("../middleware/auth");
 const validate = require("../middleware/validate");
 const schemaNote = require("../schemas/schemaNotes"); */
