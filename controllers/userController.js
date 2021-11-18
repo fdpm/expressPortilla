@@ -1,6 +1,7 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const debug = require("debug")("userscrud:user");
+const bcrypt = require("bcrypt");
+//const jwt = require("jsonwebtoken");
+
 const userController = require("../models/userModel");
 
 exports.create = async (req, res, next) => {
@@ -19,15 +20,15 @@ exports.create = async (req, res, next) => {
     password: encryptedPassword,
     photo: req.body.photo,
     active: req.body.active,
-  });
+  })
 
   user.save((err) => {
     if (err) {
       return next(err)
     }
     res.send("User registered successfully")
-  });
-};
+  })
+}
 
 /* exports.login = async (req, res, next) => {
   const { username, password } = req.body;
