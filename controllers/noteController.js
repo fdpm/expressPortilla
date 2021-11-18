@@ -31,7 +31,7 @@ exports.index = (req, res, next) => {
     })
 }
 
-
+//Aqui lo actualiza
 exports.update = (req, res, next) => {
     noteController.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
       if (err) {
@@ -40,7 +40,8 @@ exports.update = (req, res, next) => {
       res.send("Note updated successfully");
     });
   };
-  
+
+//Aqui lo manda a volar
   exports.destroy = (req, res, next) => {
     noteController.findByIdAndRemove(req.params.id, (err) => {
       if (err) {
@@ -50,6 +51,7 @@ exports.update = (req, res, next) => {
     });
   };
   
+//Aqui lo muestra
   exports.show = (req, res, next) => {
     noteController.findById(req.params.id)
       .then((note) => {
