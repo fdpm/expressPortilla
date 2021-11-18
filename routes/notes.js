@@ -19,4 +19,4 @@ router.delete("/:id", note_contoller.destroy);
 
 router.put("/:id", note_contoller.update);
 
-module.exports = router;
+module.exports = router;        
