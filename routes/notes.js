@@ -2,10 +2,9 @@ const express = require("express");
 const router = express.Router();
 const note_contoller = require("../controllers/noteController");
 const auth = require("../middleware/auth")
+const schemas = require("../models/schemas");
+const validate = require("../middleware/validate")
 
-/* 
-const validate = require("../middleware/validate");
-const schemaNote = require("../schemas/schemaNotes"); */
 
 
 //obtiene por id
@@ -13,7 +12,7 @@ router.get("/:id", note_contoller.show)
 //obtiene todos
 router.get("/",auth, note_contoller.index)
 //agrega uno
-router.post("/", note_contoller.create)
+router.post("/", validate(schemas.note),note_contoller.create)
 //borra por id
 router.delete("/:id", note_contoller.destroy); 
 

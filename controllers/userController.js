@@ -37,31 +37,21 @@ exports.create = async (req, res, next) => {
     res.status(400).send("Username and password are required");
   }
 
-  const userExist = await userController.findOne({ username });
+  const theUser = await userController.findOne({ username });
 
-  if (userExist && (await bcrypt.compare(password, userExist.password))) {
-    /* const { _id, firstname, lastname, identification, photo, active } =
-      userExist; */
-    const token = jwt.sign({ user_id: userExist._id, username }, process.env.TOKENSECRET, { expiresIn: "2h" } );
-    userExist.token = token;
-    res.status(200).json(userExist/* {
-      _id,
-      username,
-      firstname,
-      lastname,
-      identification,
-      photo,
-      active,
-      token,
-    } */);
+  if (theUser && (await bcrypt.compare(password, theUser.password))) {
+    
+    const token = jwt.sign({ user_id: theUser._id, username }, process.env.TOKENSECRET, { expiresIn: "2h" } );
+    theUser.token = token;
+    res.status(200).json({"token":token});
   } 
   else {
     res.status(400).send("invalid credentials");
   }
 };
 
-/* exports.index = (req, res, next) => {
-  User.find({}, (err, users) => {
+exports.index = (req, res, next) => {
+  userController.find({}, (err, users) => {
     if (err) {
       return next(err);
     }
@@ -70,7 +60,7 @@ exports.create = async (req, res, next) => {
 };
 
 exports.update = (req, res, next) => {
-  User.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
+  userController.findByIdAndUpdate(req.params.id, { $set: req.body }, (err) => {
     if (err) {
       return next(err);
     }
@@ -79,10 +69,10 @@ exports.update = (req, res, next) => {
 };
 
 exports.destroy = (req, res, next) => {
-  User.findByIdAndRemove(req.params.id, (err) => {
+  userController.findByIdAndRemove(req.params.id, (err) => {
     if (err) {
       return next(err);
     }
     res.send("User deleted successfully");
   });
-};  */
+}; 
