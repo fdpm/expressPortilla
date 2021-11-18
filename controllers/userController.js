@@ -1,6 +1,6 @@
 const debug = require("debug")("userscrud:user");
 const bcrypt = require("bcrypt");
-//const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const userController = require("../models/userModel");
 
@@ -30,14 +30,14 @@ exports.create = async (req, res, next) => {
   })
 }
 
-/* exports.login = async (req, res, next) => {
+ exports.login = async (req, res, next) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
     res.status(400).send("Username and password are required");
   }
 
-  const userExist = await User.findOne({ username });
+  const userExist = await userController.findOne({ username });
 
   if (userExist && (await bcrypt.compare(password, userExist.password))) {
     const { _id, firstname, lastname, identification, photo, active } =
@@ -63,7 +63,7 @@ exports.create = async (req, res, next) => {
   }
 };
 
-exports.index = (req, res, next) => {
+/* exports.index = (req, res, next) => {
   User.find({}, (err, users) => {
     if (err) {
       return next(err);
@@ -88,4 +88,4 @@ exports.destroy = (req, res, next) => {
     }
     res.send("User deleted successfully");
   });
-}; */
+};  */

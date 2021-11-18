@@ -1,17 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const note_contoller = require("../controllers/noteController");
+const auth = require("../middleware/auth")
 
-/* const auth = require("../middleware/auth");
+/* 
 const validate = require("../middleware/validate");
 const schemaNote = require("../schemas/schemaNotes"); */
-
 
 
 //obtiene por id
 router.get("/:id", note_contoller.show)
 //obtiene todos
-router.get("/", note_contoller.index)
+router.get("/",auth, note_contoller.index)
 //agrega uno
 router.post("/", note_contoller.create)
 //borra por id
